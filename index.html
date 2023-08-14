@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+
+    <script defer src="script.js"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <ul class="weathers">
+        <li class="weather" data-id="1234567890">
+          <h2 class="weather__title">Weather in Paris</h2>
+          <div class="weather__details">
+            <span class="weather__icon">🏃‍♂️</span>
+            <span class="weather__value">5.2</span>
+            <span class="weather__unit">km</span>
+          </div>
+          <div class="weather__details">
+            <span class="weather__icon">⏱</span>
+            <span class="weather__value">24</span>
+            <span class="weather__unit">min</span>
+          </div>
+          <div class="weather__details">
+            <span class="weather__icon">⚡️</span>
+            <span class="weather__value">4.6</span>
+            <span class="weather__unit">min/km</span>
+          </div>
+          <div class="weather__details">
+            <span class="weather__icon">🦶🏼</span>
+            <span class="weather__value">178</span>
+            <span class="weather__unit">spm</span>
+          </div>
+        </li>
+
+        <li class="weather" data-id="1234567891">
+          <h2 class="weather__title">Weather in Moscow</h2>
+          <div class="weather__details">
+            <span class="weather__icon">🚴‍♀️</span>
+            <span class="weather__value">27</span>
+            <span class="weather__unit">km</span>
+          </div>
+          <div class="weather__details">
+            <span class="weather__icon">⏱</span>
+            <span class="weather__value">95</span>
+            <span class="weather__unit">min</span>
+          </div>
+          <div class="weather__details">
+            <span class="weather__icon">⚡️</span>
+            <span class="weather__value">16</span>
+            <span class="weather__unit">km/h</span>
+          </div>
+          <div class="weather__details">
+            <span class="weather__icon">⛰</span>
+            <span class="weather__value">223</span>
+            <span class="weather__unit">m</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div id="map"></div>
+  </body>
+</html>
