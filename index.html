@@ -36,51 +36,67 @@
     <div class="sidebar">
       <ul class="weathers">
         <li class="weather" data-id="1234567890">
-          <h2 class="weather__title">Weather in Paris</h2>
-          <div class="weather__details">
-            <span class="weather__icon">🏃‍♂️</span>
-            <span class="weather__value">5.2</span>
-            <span class="weather__unit">km</span>
-          </div>
-          <div class="weather__details">
-            <span class="weather__icon">⏱</span>
-            <span class="weather__value">24</span>
-            <span class="weather__unit">min</span>
-          </div>
-          <div class="weather__details">
-            <span class="weather__icon">⚡️</span>
-            <span class="weather__value">4.6</span>
-            <span class="weather__unit">min/km</span>
-          </div>
-          <div class="weather__details">
-            <span class="weather__icon">🦶🏼</span>
-            <span class="weather__value">178</span>
-            <span class="weather__unit">spm</span>
+          <div id="weather_wrapper">
+            <div class="weatherCard">
+              <div class="currentTemp">
+                <span class="temp">23℃</span>
+                <span class="location">Brussels</span>
+              </div>
+              <div class="currentWeather">
+                <span class="conditions"
+                  ><img class="weather__temp" src="images/clear.png"
+                /></span>
+                <div class="info">
+                  <span class="rain">1.3 MM</span>
+                  <span class="wind">10 MPH</span>
+                </div>
+              </div>
+            </div>
           </div>
         </li>
 
         <li class="weather" data-id="1234567891">
-          <h2 class="weather__title">Weather in Moscow</h2>
-          <div class="weather__details">
-            <span class="weather__icon">🚴‍♀️</span>
-            <span class="weather__value">27</span>
-            <span class="weather__unit">km</span>
+          <div id="weather_wrapper">
+            <div class="weatherCard">
+              <div class="currentTemp">
+                <span class="temp">23℃</span>
+                <span class="location">Brussels</span>
+              </div>
+              <div class="currentWeather">
+                <span class="conditions"
+                  ><img class="weather__temp" src="images/clear.png"
+                /></span>
+                <div class="info">
+                  <span class="rain">1.3 MM</span>
+                  <span class="wind">10 MPH</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="weather__details">
-            <span class="weather__icon">⏱</span>
-            <span class="weather__value">95</span>
-            <span class="weather__unit">min</span>
+          <!-- <h2 class="weather__title">Moscow</h2>
+          <div class="weather__details--temp">
+            <span class="weather__icon"
+              ><img class="weather__temp" src="images/clear.png"
+            /></span>
+            <span class="weather__value">5.2</span>
+            <span class="weather__unit">℃</span>
           </div>
-          <div class="weather__details">
-            <span class="weather__icon">⚡️</span>
-            <span class="weather__value">16</span>
+
+          <div class="weather__details--wind">
+            <span class="weather__icon"
+              ><img class="weather__wind" src="images/wind.png"
+            /></span>
+            <span class="weather__value">24</span>
             <span class="weather__unit">km/h</span>
           </div>
-          <div class="weather__details">
-            <span class="weather__icon">⛰</span>
-            <span class="weather__value">223</span>
-            <span class="weather__unit">m</span>
-          </div>
+
+          <div class="weather__details--humidity">
+            <span class="weather__icon"
+              ><img class="weather__humidity" src="images/humidity.png"
+            /></span>
+            <span class="weather__value">4.6</span>
+            <span class="weather__unit">%</span>
+          </div> -->
         </li>
       </ul>
     </div>
