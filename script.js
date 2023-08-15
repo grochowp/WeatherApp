@@ -3,7 +3,7 @@ class App {
   searchBar = document.querySelector('.search__bar');
   searchIcon = document.querySelector('.searchIcon');
   deleteBtn = document.querySelector('.delete__btn');
-
+  weatherCity = document.querySelector('.weathers');
   #map;
   #mapZoomLevel = 13;
   #cities = [];
@@ -20,11 +20,12 @@ class App {
         this._addCityBySearch();
       }
     });
-    // console.log(this.deleteBtn);
-    this.deleteBtn.addEventListener(
-      'click',
-      this._clearLocalStorage.bind(this)
-    );
+
+    //prettier-ignore
+    this.deleteBtn.addEventListener('click', this._clearLocalStorage.bind(this));
+
+    //prettier-ignore
+    this.weatherCity.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   _getCurrentPosition() {
@@ -62,6 +63,26 @@ class App {
     });
   }
 
+  _moveToPopup(e) {
+    const clickedWeatherCard = e.target.closest('.weatherCard');
+    if (!clickedWeatherCard) return;
+    const locationElement = clickedWeatherCard.querySelector('.location');
+    if (!locationElement) return;
+
+    const locationText = locationElement.textContent;
+    const cityData = this.#cities
+      .filter(city => city.location.name === locationText)
+      .map(city => city.location);
+
+    const coords = [cityData[0].lat, cityData[0].lon];
+    this.#map.flyTo(coords, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 3,
+      },
+    });
+  }
+
   _renderWeatherMarker(data) {
     if (data === null) return;
     const curData = data.current;
@@ -79,8 +100,14 @@ class App {
       )
       .setPopupContent(
         `Location: ${locData.name} Temp C: ${curData.temp_c} Wind kph: ${curData.wind_kph}`
-      )
-      .openPopup();
+      );
+
+    this.#map.flyTo(coords, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 3,
+      },
+    });
   }
 
   _renderWeather(data) {

@@ -141,7 +141,8 @@ body {
   text-align: center;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 1.6vw;
+  font-size: 1.8em;
+
   display: block;
 }
 .conditions {
