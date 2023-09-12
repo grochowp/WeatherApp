@@ -3,14 +3,13 @@ class App {
   searchBar = document.querySelector('.search__bar');
   searchIcon = document.querySelector('.searchIcon');
   deleteBtn = document.querySelector('.delete__btn');
-  weatherCity = document.querySelector('.weathers');
+
   #map;
   #mapZoomLevel = 13;
   #cities = [];
 
   constructor() {
     this._getCurrentPosition();
-    console.log(this.#cities);
     this._getLocalStorage();
 
     this.searchIcon.addEventListener('click', this._addCityBySearch.bind(this));
@@ -25,7 +24,7 @@ class App {
     this.deleteBtn.addEventListener('click', this._clearLocalStorage.bind(this));
 
     //prettier-ignore
-    this.weatherCity.addEventListener('click', this._moveToPopup.bind(this));
+    this._parentElement.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   _getCurrentPosition() {
@@ -60,6 +59,7 @@ class App {
 
     this.#cities.forEach(city => {
       this._renderWeatherMarker(city);
+      this._renderWeather(city);
     });
   }
 
@@ -146,27 +146,18 @@ class App {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
-  // Funciton to find city in API by search bar
-  _addCityBySearch() {
-    const city = this.searchBar.value;
+  async _addCityBySearch() {
+    try {
+      const city = this.searchBar.value;
 
-    if (!city) return;
+      if (!city) return;
 
-    const findCityFromAPI = async function (city) {
-      try {
-        const response = await fetch(
-          `http://api.weatherapi.com/v1/current.json?key=0d28c2c2e0c840429fb100110231408&q=${city}&aqi=no
+      const response = await fetch(
+        `http://api.weatherapi.com/v1/current.json?key=0d28c2c2e0c840429fb100110231408&q=${city}&aqi=no
           `
-        );
-        const data = await response.json();
-        return data;
-      } catch (err) {
-        console.log(err);
-      }
-    };
+      );
+      const data = await response.json();
 
-    // Display markup to city found by search or click on map
-    findCityFromAPI(city).then(data => {
       const isDuplicate = this.#cities.some(
         cityObj => cityObj.location.name === data.location.name
       );
@@ -178,26 +169,18 @@ class App {
       this.#cities.push(data);
       this._setLocalStorage();
       this.searchBar.value = '';
-    });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  _addCityByClick(mapE) {
-    const { lat, lng } = mapE.latlng;
-
-    // || city === this.#cities.location.name.includes(city)
-    const findCityFromAPI = async function (lat, lng) {
-      try {
-        const response = await fetch(
-          `http://api.weatherapi.com/v1/current.json?key=0d28c2c2e0c840429fb100110231408&q=${lat},${lng}`
-        );
-        const data = await response.json();
-        return data;
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    findCityFromAPI(lat, lng).then(data => {
+  async _addCityByClick(mapE) {
+    try {
+      const { lat, lng } = mapE.latlng;
+      const response = await fetch(
+        `http://api.weatherapi.com/v1/current.json?key=0d28c2c2e0c840429fb100110231408&q=${lat},${lng}`
+      );
+      const data = await response.json();
       const isDuplicate = this.#cities.some(
         cityObj => cityObj.location.name === data.location.name
       );
@@ -208,10 +191,11 @@ class App {
       this._renderWeatherMarker(data);
       this.#cities.push(data);
       this._setLocalStorage();
-    });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  //////// TO DO
   _setLocalStorage() {
     localStorage.setItem('weather', JSON.stringify(this.#cities));
   }
@@ -219,11 +203,7 @@ class App {
   _getLocalStorage() {
     const data = JSON.parse(localStorage.getItem('weather'));
     if (!data) return;
-
     this.#cities = data;
-    this.#cities.forEach(city => {
-      this._renderWeather(city);
-    });
   }
 
   _clearLocalStorage() {
